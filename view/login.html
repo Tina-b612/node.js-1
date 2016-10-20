@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>登陆页面</h1>
+		<p>用户名：
+			<input type="text" name="username" id="username" value="" />
+			<span class="tips"></span>
+		</p>
+		<p>密  码：
+			<input type="password" name="password" id="password" value="" />
+		</p>
+		<p>
+			<input type="button" name="btn" id="btn" value="提交" />
+		</p>
+		
+		<script src="/../static/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">	
+			$("#btn").click(function (){
+				$.ajax({
+					//url:"http://localhost:8082/loginData",
+					url:"/loginData",
+					method:"get",
+					data:{
+						userName:$("#username").val(),
+						password:$("#password").val(),
+					},
+					success:function (data){
+						if(data.status == 0){
+							//window.location.href = '/'
+							$(".tips").html(data.message)
+						}else if(data.status == 1){
+							$(".tips").html(data.message)
+						}
+						
+					}
+				});	
+			})
+		</script>
+	</body>
+</html>
